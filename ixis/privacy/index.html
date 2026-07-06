@@ -27,7 +27,7 @@
     font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
     line-height:1.8; font-size:16px;
   }
-  main{max-width:760px; margin:0 auto; padding:40px 18px 72px;}
+  main{max-width:760px; margin:0 auto; padding:clamp(28px,5vw,52px) clamp(16px,4.5vw,30px) 72px;}
 
   /* ===== ヘッダー（タイトル画面: ブロック"i" + i x PUZZLE + ixis） ===== */
   header{text-align:center; margin-bottom:30px;}
@@ -39,15 +39,15 @@
   .b.d{background:#171a34;}
   .wordmark{text-align:left; line-height:1.1;}
   .wordmark .sub{color:var(--violet200); font-size:.72rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; margin-bottom:2px;}
-  .wordmark .name{color:var(--text); font-size:2.1rem; font-weight:800; letter-spacing:.04em;}
-  header h1{font-size:1.35rem; font-weight:800; margin:0 0 4px; letter-spacing:.06em;}
+  .wordmark .name{color:var(--text); font-size:clamp(1.85rem,7vw,2.6rem); font-weight:800; letter-spacing:.04em;}
+  header h1{font-size:clamp(1.2rem,4.5vw,1.7rem); font-weight:800; margin:0 0 4px; letter-spacing:.06em;}
   header .date{color:var(--dim); font-size:.82rem;}
 
   /* ===== カード（RewardedAd surface に準拠） ===== */
   .card{
     background:linear-gradient(180deg, rgba(26,26,58,.55), rgba(20,20,43,.55));
     border:1px solid var(--border); border-radius:18px;
-    padding:20px 22px; margin-bottom:14px;
+    padding:clamp(16px,4.2vw,26px) clamp(16px,4.2vw,26px); margin-bottom:14px;
     box-shadow:0 8px 28px rgba(0,0,0,.35);
     backdrop-filter:blur(2px);
   }
@@ -81,6 +81,27 @@
 
   footer{text-align:center; margin-top:28px; color:var(--dim); font-size:.78rem;}
   footer .mk{color:var(--violet200); font-weight:800; letter-spacing:.05em;}
+
+  /* ===== レスポンシブ ===== */
+  /* 表・長いURLの横溢れを防止（狭幅端末） */
+  table{table-layout:auto; word-break:break-word;}
+  th,td{overflow-wrap:anywhere;}
+  /* タブレット〜デスクトップ: 余白と文字をゆったりに */
+  @media (min-width:700px){
+    body{font-size:17px;}
+    .card{border-radius:20px;}
+    header{margin-bottom:40px;}
+    h2{font-size:1.15rem;}
+  }
+  /* 小型スマホ(〜360px): ロゴと余白を微調整 */
+  @media (max-width:360px){
+    .logo{gap:12px;}
+    .blocks{grid-template-columns:repeat(3,11px); grid-template-rows:repeat(6,11px);}
+    th,td{padding:8px 9px; font-size:.86rem;}
+    a{font-size:.92rem;}
+  }
+  /* 端末のフォント拡大設定を尊重しつつ最低限の可読性を確保 */
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth;} }
 </style>
 </head>
 <body>
