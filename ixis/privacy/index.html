@@ -4,64 +4,127 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0a1a">
 <title>ixis プライバシーポリシー</title>
 <style>
-  :root { color-scheme: light dark; }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 24px 16px 64px;
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
-    line-height: 1.75; color: #1a1a2e; background: #f7f8fc;
-    -webkit-text-size-adjust: 100%;
+  /* ===== ixis デザイントークン（アプリ RewardedAd/タイトル画面に準拠） ===== */
+  :root{
+    --ink:#0a0a1a; --surface:#14142b; --field:#08081a; --tier1:#231d4a;
+    --violet:#7c3aed; --violet400:#8b5cf6; --violet200:#c4b5fd;
+    --gold:#fbbf24; --gold-ink:#1a1205;
+    --text:#e7e9f3; --muted:#9aa3bd; --dim:#5c6486;
+    --border:#2a2a4a; --border-bright:#3a3a6a;
   }
-  @media (prefers-color-scheme: dark) {
-    body { color: #e2e8f0; background: #0a0a1a; }
-    a { color: #8b5cf6; }
-    .card { background: #14142b; border-color: #2a2a4a; }
-    h1, h2 { color: #f1f5f9; }
-    th { background: #1c1c38; }
-    td, th { border-color: #2a2a4a; }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; padding:0; color:var(--text);
+    background:
+      radial-gradient(1200px 480px at 50% -160px, rgba(124,58,237,.28), transparent 70%),
+      radial-gradient(800px 400px at 90% 8%, rgba(251,191,36,.06), transparent 60%),
+      var(--ink);
+    background-attachment:fixed;
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
+    line-height:1.8; font-size:16px;
   }
-  main { max-width: 760px; margin: 0 auto; }
-  h1 { font-size: 1.6rem; margin: 0 0 4px; letter-spacing: .02em; }
-  .meta { color: #64748b; font-size: .85rem; margin-bottom: 24px; }
-  .card {
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
-    padding: 20px 22px; margin-bottom: 16px;
+  main{max-width:760px; margin:0 auto; padding:40px 18px 72px;}
+
+  /* ===== ヘッダー（タイトル画面: ブロック"i" + i x PUZZLE + ixis） ===== */
+  header{text-align:center; margin-bottom:30px;}
+  .logo{display:inline-flex; align-items:center; gap:16px; margin-bottom:22px;}
+  .blocks{display:grid; grid-template-columns:repeat(3,13px); grid-template-rows:repeat(6,13px); gap:3px;}
+  .b{border-radius:4px;}
+  .b.p{background:var(--violet400); box-shadow:0 0 10px rgba(139,92,246,.5);}
+  .b.g{background:var(--gold); box-shadow:0 0 10px rgba(251,191,36,.35);}
+  .b.d{background:#171a34;}
+  .wordmark{text-align:left; line-height:1.1;}
+  .wordmark .sub{color:var(--violet200); font-size:.72rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; margin-bottom:2px;}
+  .wordmark .name{color:var(--text); font-size:2.1rem; font-weight:800; letter-spacing:.04em;}
+  header h1{font-size:1.35rem; font-weight:800; margin:0 0 4px; letter-spacing:.06em;}
+  header .date{color:var(--dim); font-size:.82rem;}
+
+  /* ===== カード（RewardedAd surface に準拠） ===== */
+  .card{
+    background:linear-gradient(180deg, rgba(26,26,58,.55), rgba(20,20,43,.55));
+    border:1px solid var(--border); border-radius:18px;
+    padding:20px 22px; margin-bottom:14px;
+    box-shadow:0 8px 28px rgba(0,0,0,.35);
+    backdrop-filter:blur(2px);
   }
-  h2 { font-size: 1.12rem; margin: 0 0 10px; }
-  p, li { font-size: .96rem; }
-  ul { padding-left: 1.2em; margin: 8px 0; }
-  a { color: #6d28d9; word-break: break-all; }
-  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: .9rem; }
-  th, td { border: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; vertical-align: top; }
-  th { background: #f1f5f9; white-space: nowrap; }
-  .fill { color: #dc2626; font-weight: 700; }
-  @media (prefers-color-scheme: dark) { .fill { color: #fca5a5; } }
+  .card.lead{border-color:var(--border-bright);}
+  h2{display:flex; align-items:center; gap:10px; font-size:1.08rem; font-weight:700; margin:0 0 12px; color:#f2f3fb;}
+  h2::before{content:""; width:8px; height:8px; border-radius:3px; background:var(--violet); box-shadow:0 0 8px var(--violet); flex:none;}
+  h2 .n{color:var(--violet200); font-variant-numeric:tabular-nums; font-weight:800; font-size:.9rem;}
+  p{margin:0 0 8px; font-size:.96rem; color:#d6dae9;}
+  p:last-child{margin-bottom:0;}
+  strong{color:var(--text);}
+  ul{padding-left:1.15em; margin:8px 0;}
+  li{font-size:.95rem; margin:5px 0; color:#d6dae9;}
+  li::marker{color:var(--violet400);}
+  a{color:var(--violet400); text-decoration:none; border-bottom:1px solid rgba(139,92,246,.35); word-break:break-all;}
+  a:hover{color:var(--violet200); border-color:var(--violet200);}
+
+  /* データ表 */
+  table{width:100%; border-collapse:separate; border-spacing:0; margin:12px 0 4px; font-size:.9rem; border:1px solid var(--border); border-radius:12px; overflow:hidden;}
+  th,td{padding:9px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border);}
+  th{background:rgba(124,58,237,.14); color:var(--violet200); font-weight:700; white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  td:first-child{color:var(--text); font-weight:600; white-space:nowrap;}
+
+  /* 問い合わせ（gold アクセントの mailto ボタン） */
+  .contact a{
+    display:inline-block; margin-top:6px; padding:11px 20px; border-radius:12px;
+    background:var(--gold); color:var(--gold-ink); font-weight:800; letter-spacing:.02em;
+    border:none; box-shadow:0 4px 16px rgba(251,191,36,.28);
+  }
+  .contact a:hover{filter:brightness(1.06); color:var(--gold-ink);}
+
+  footer{text-align:center; margin-top:28px; color:var(--dim); font-size:.78rem;}
+  footer .mk{color:var(--violet200); font-weight:800; letter-spacing:.05em;}
 </style>
 </head>
 <body>
 <main>
-  <h1>プライバシーポリシー</h1>
-  <div class="meta">アプリ名: <strong>ixis</strong> ／ 最終更新日: 2026年7月6日</div>
+  <header>
+    <div class="logo">
+      <div class="blocks" aria-hidden="true">
+        <span class="b p" style="grid-column:2;grid-row:1"></span>
+        <span class="b d" style="grid-column:1;grid-row:2"></span>
+        <span class="b p" style="grid-column:2;grid-row:2"></span>
+        <span class="b d" style="grid-column:3;grid-row:2"></span>
+        <span class="b g" style="grid-column:2;grid-row:3"></span>
+        <span class="b g" style="grid-column:2;grid-row:4"></span>
+        <span class="b g" style="grid-column:2;grid-row:5"></span>
+        <span class="b d" style="grid-column:1;grid-row:6"></span>
+        <span class="b p" style="grid-column:2;grid-row:6"></span>
+        <span class="b d" style="grid-column:3;grid-row:6"></span>
+      </div>
+      <div class="wordmark">
+        <div class="sub">i x PUZZLE</div>
+        <div class="name">ixis</div>
+      </div>
+    </div>
+    <h1>プライバシーポリシー</h1>
+    <div class="date">最終更新日: 2026年7月6日</div>
+  </header>
 
-  <div class="card">
-    <p>本プライバシーポリシー（以下「本ポリシー」）は、<strong>ixis</strong>（以下「本アプリ」）における利用者情報の取り扱いについて定めるものです。本アプリをご利用いただくことで、本ポリシーに同意したものとみなします。</p>
+  <div class="card lead">
+    <p>本プライバシーポリシー（以下「本ポリシー」）は、パズルゲーム <strong>ixis</strong>（以下「本アプリ」）における利用者情報の取り扱いについて定めるものです。本アプリをご利用いただくことで、本ポリシーに同意したものとみなします。</p>
   </div>
 
   <div class="card">
-    <h2>1. 提供者</h2>
+    <h2><span class="n">1</span>提供者</h2>
     <p>本アプリの提供者（開発者）は <strong>yuya Takahashi</strong> です。</p>
   </div>
 
   <div class="card">
-    <h2>2. 当社が収集する情報</h2>
-    <p>本アプリ自体は、氏名・メールアドレス等の個人を直接特定する情報を収集・サーバー送信することはありません。アカウント登録やログインの機能もありません。</p>
+    <h2><span class="n">2</span>収集する情報</h2>
+    <p>本アプリ自体は、氏名・メールアドレス等の個人を直接特定する情報を収集・サーバー送信することはありません。アカウント登録やログイン機能もありません。</p>
     <p>ただし、下記の第三者サービス（広告配信）が、広告の表示・計測のために一部の情報を自動的に収集します。</p>
   </div>
 
   <div class="card">
-    <h2>3. 広告配信（Google AdMob）の利用</h2>
+    <h2><span class="n">3</span>広告配信（Google AdMob）の利用</h2>
     <p>本アプリは、広告配信のために Google LLC が提供する <strong>Google AdMob</strong> を利用しています。AdMob は広告の配信・表示回数の計測・不正防止・（同意がある場合）広告の最適化のために、次のような情報を自動的に取得することがあります。</p>
     <table>
       <tr><th>区分</th><th>内容の例</th></tr>
@@ -70,48 +133,52 @@
       <tr><td>使用状況</td><td>広告の表示・タップ等の操作、アプリ内での広告関連イベント</td></tr>
       <tr><td>診断情報</td><td>クラッシュや動作に関する技術情報</td></tr>
     </table>
-    <p>AdMob における情報の取り扱い・Google がデータをどのように使用するかについては、以下をご確認ください。</p>
+    <p>Google がデータをどのように使用するかについては、以下をご確認ください。</p>
     <ul>
-      <li>Google プライバシーポリシー: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
-      <li>Google のサービス利用時のデータ使用: <a href="https://policies.google.com/technologies/partner-sites">https://policies.google.com/technologies/partner-sites</a></li>
+      <li>Google プライバシーポリシー: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></li>
+      <li>Google のサービス利用時のデータ使用: <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a></li>
     </ul>
   </div>
 
   <div class="card">
-    <h2>4. 広告識別子とトラッキング（App Tracking Transparency）</h2>
+    <h2><span class="n">4</span>広告識別子とトラッキング（ATT）</h2>
     <p>iOS では、Apple の App Tracking Transparency（ATT）に基づき、初回起動時等にトラッキングの許可を求めることがあります。</p>
     <ul>
       <li>利用者が<strong>許可した場合</strong>、広告識別子（IDFA）を<strong>広告目的（関連性の高い広告の表示・計測）</strong>で利用する場合があります。</li>
-      <li>利用者が<strong>許可しない場合</strong>、広告は引き続き表示されますが、パーソナライズ（最適化）は行われません。</li>
-      <li>許可の設定は、端末の「設定 &gt; プライバシーとセキュリティ &gt; トラッキング」からいつでも変更できます。</li>
+      <li>利用者が<strong>許可しない場合</strong>も広告は表示されますが、パーソナライズ（最適化）は行われません。</li>
+      <li>許可設定は、端末の「設定 &gt; プライバシーとセキュリティ &gt; トラッキング」からいつでも変更できます。</li>
     </ul>
   </div>
 
   <div class="card">
-    <h2>5. 端末内に保存される情報</h2>
-    <p>サウンド設定、表示設定、スコア・ランキング、購入状態、チュートリアル表示済みフラグ等は、利用者の端末内（ローカルストレージ）にのみ保存されます。これらの情報が提供者のサーバーへ送信されることはありません。</p>
+    <h2><span class="n">5</span>端末内に保存される情報</h2>
+    <p>サウンド設定・表示設定・スコア・ランキング・購入状態・チュートリアル表示済みフラグ等は、利用者の端末内（ローカルストレージ）にのみ保存され、提供者のサーバーへ送信されることはありません。</p>
   </div>
 
   <div class="card">
-    <h2>6. アプリ内課金</h2>
-    <p>本アプリの買い切り課金は、Apple App Store（App 内課金）または Google Play（アプリ内課金）を通じて処理されます。決済情報（クレジットカード番号等）は各プラットフォームが取り扱い、本アプリおよび提供者が取得・保持することはありません。</p>
+    <h2><span class="n">6</span>アプリ内課金</h2>
+    <p>本アプリの買い切り課金は、Apple App Store または Google Play を通じて処理されます。決済情報（クレジットカード番号等）は各プラットフォームが取り扱い、本アプリおよび提供者が取得・保持することはありません。</p>
   </div>
 
   <div class="card">
-    <h2>7. 児童のプライバシー</h2>
-    <p>本アプリは特に児童を対象としたものではありません。児童の個人情報を意図的に収集することはありません。</p>
+    <h2><span class="n">7</span>児童のプライバシー</h2>
+    <p>本アプリは特に児童を対象としたものではなく、児童の個人情報を意図的に収集することはありません。</p>
   </div>
 
   <div class="card">
-    <h2>8. 本ポリシーの変更</h2>
-    <p>本ポリシーは、法令の変更やサービス内容の変更に応じて改定されることがあります。重要な変更がある場合は、本ページ上で告知します。</p>
+    <h2><span class="n">8</span>本ポリシーの変更</h2>
+    <p>本ポリシーは、法令やサービス内容の変更に応じて改定されることがあります。重要な変更がある場合は、本ページ上で告知します。</p>
   </div>
 
-  <div class="card">
-    <h2>9. お問い合わせ</h2>
+  <div class="card contact">
+    <h2><span class="n">9</span>お問い合わせ</h2>
     <p>本ポリシーまたは本アプリに関するお問い合わせは、下記までご連絡ください。</p>
-    <p><strong class="fill">【お問い合わせ先メールアドレスを記入】</strong></p>
+    <a href="mailto:iPr0g5na@gmail.com">iPr0g5na@gmail.com</a>
   </div>
+
+  <footer>
+    <span class="mk">ixis</span> — i x PUZZLE　·　© 2026 yuya Takahashi
+  </footer>
 </main>
 </body>
 </html>
