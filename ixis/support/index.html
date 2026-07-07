@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0a1a">
+<title>ixis サポート</title>
+<style>
+  /* ===== ixis デザイントークン（アプリ RewardedAd/タイトル画面に準拠） ===== */
+  :root{
+    --ink:#0a0a1a; --surface:#14142b; --field:#08081a; --tier1:#231d4a;
+    --violet:#7c3aed; --violet400:#8b5cf6; --violet200:#c4b5fd;
+    --gold:#fbbf24; --gold-ink:#1a1205;
+    --text:#e7e9f3; --muted:#9aa3bd; --dim:#5c6486;
+    --border:#2a2a4a; --border-bright:#3a3a6a;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0; padding:0; color:var(--text);
+    background:
+      radial-gradient(1200px 480px at 50% -160px, rgba(124,58,237,.28), transparent 70%),
+      radial-gradient(800px 400px at 90% 8%, rgba(251,191,36,.06), transparent 60%),
+      var(--ink);
+    background-attachment:fixed;
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
+    line-height:1.8; font-size:16px;
+  }
+  main{max-width:760px; margin:0 auto; padding:clamp(28px,5vw,52px) clamp(16px,4.5vw,30px) 72px;}
+
+  /* ===== ヘッダー（タイトル画面: ブロック"i" + i x PUZZLE + ixis） ===== */
+  header{text-align:center; margin-bottom:30px;}
+  .logo{display:inline-flex; align-items:center; gap:16px; margin-bottom:22px;}
+  .blocks{display:grid; grid-template-columns:repeat(3,13px); grid-template-rows:repeat(6,13px); gap:3px;}
+  .b{border-radius:4px;}
+  .b.p{background:var(--violet400); box-shadow:0 0 10px rgba(139,92,246,.5);}
+  .b.g{background:var(--gold); box-shadow:0 0 10px rgba(251,191,36,.35);}
+  .b.d{background:#171a34;}
+  .wordmark{text-align:left; line-height:1.1;}
+  .wordmark .sub{color:var(--violet200); font-size:.72rem; font-weight:700; letter-spacing:.28em; text-transform:uppercase; margin-bottom:2px;}
+  .wordmark .name{color:var(--text); font-size:clamp(1.85rem,7vw,2.6rem); font-weight:800; letter-spacing:.04em;}
+  header h1{font-size:clamp(1.2rem,4.5vw,1.7rem); font-weight:800; margin:0 0 4px; letter-spacing:.06em;}
+  header .date{color:var(--dim); font-size:.82rem;}
+
+  /* ===== カード（RewardedAd surface に準拠） ===== */
+  .card{
+    background:linear-gradient(180deg, rgba(26,26,58,.55), rgba(20,20,43,.55));
+    border:1px solid var(--border); border-radius:18px;
+    padding:clamp(16px,4.2vw,26px) clamp(16px,4.2vw,26px); margin-bottom:14px;
+    box-shadow:0 8px 28px rgba(0,0,0,.35);
+    backdrop-filter:blur(2px);
+  }
+  .card.lead{border-color:var(--border-bright);}
+  h2{display:flex; align-items:center; gap:10px; font-size:1.08rem; font-weight:700; margin:0 0 12px; color:#f2f3fb;}
+  h2::before{content:""; width:8px; height:8px; border-radius:3px; background:var(--violet); box-shadow:0 0 8px var(--violet); flex:none;}
+  h2 .n{color:var(--violet200); font-variant-numeric:tabular-nums; font-weight:800; font-size:.9rem;}
+  p{margin:0 0 8px; font-size:.96rem; color:#d6dae9;}
+  p:last-child{margin-bottom:0;}
+  strong{color:var(--text);}
+  ul{padding-left:1.15em; margin:8px 0;}
+  li{font-size:.95rem; margin:5px 0; color:#d6dae9;}
+  li::marker{color:var(--violet400);}
+  a{color:var(--violet400); text-decoration:none; border-bottom:1px solid rgba(139,92,246,.35); word-break:break-all;}
+  a:hover{color:var(--violet200); border-color:var(--violet200);}
+
+  /* FAQ の質問 */
+  .q{color:#f2f3fb; font-weight:700; margin:14px 0 4px; font-size:1rem;}
+  .q:first-of-type{margin-top:2px;}
+  .q::before{content:"Q. "; color:var(--gold); font-weight:800;}
+  .a{margin:0 0 4px;}
+  .a::before{content:"A. "; color:var(--violet200); font-weight:800;}
+
+  /* 操作表 */
+  table{width:100%; border-collapse:separate; border-spacing:0; margin:12px 0 4px; font-size:.9rem; border:1px solid var(--border); border-radius:12px; overflow:hidden;}
+  th,td{padding:9px 12px; text-align:left; vertical-align:top; border-bottom:1px solid var(--border);}
+  th{background:rgba(124,58,237,.14); color:var(--violet200); font-weight:700; white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  td:first-child{color:var(--text); font-weight:600; white-space:nowrap;}
+
+  /* 問い合わせ（gold アクセントの mailto ボタン） */
+  .contact a{
+    display:inline-block; margin-top:6px; padding:11px 20px; border-radius:12px;
+    background:var(--gold); color:var(--gold-ink); font-weight:800; letter-spacing:.02em;
+    border:none; box-shadow:0 4px 16px rgba(251,191,36,.28);
+  }
+  .contact a:hover{filter:brightness(1.06); color:var(--gold-ink);}
+
+  footer{text-align:center; margin-top:28px; color:var(--dim); font-size:.78rem;}
+  footer .mk{color:var(--violet200); font-weight:800; letter-spacing:.05em;}
+  footer a{color:var(--dim); border:none;}
+  footer a:hover{color:var(--violet200);}
+
+  /* ===== レスポンシブ ===== */
+  table{table-layout:auto; word-break:break-word;}
+  th,td{overflow-wrap:anywhere;}
+  @media (min-width:700px){
+    body{font-size:17px;}
+    .card{border-radius:20px;}
+    header{margin-bottom:40px;}
+    h2{font-size:1.15rem;}
+  }
+  @media (max-width:360px){
+    .logo{gap:12px;}
+    .blocks{grid-template-columns:repeat(3,11px); grid-template-rows:repeat(6,11px);}
+    th,td{padding:8px 9px; font-size:.86rem;}
+    a{font-size:.92rem;}
+  }
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth;} }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="logo">
+      <div class="blocks" aria-hidden="true">
+        <span class="b p" style="grid-column:2;grid-row:1"></span>
+        <span class="b d" style="grid-column:1;grid-row:2"></span>
+        <span class="b p" style="grid-column:2;grid-row:2"></span>
+        <span class="b d" style="grid-column:3;grid-row:2"></span>
+        <span class="b g" style="grid-column:2;grid-row:3"></span>
+        <span class="b g" style="grid-column:2;grid-row:4"></span>
+        <span class="b g" style="grid-column:2;grid-row:5"></span>
+        <span class="b d" style="grid-column:1;grid-row:6"></span>
+        <span class="b p" style="grid-column:2;grid-row:6"></span>
+        <span class="b d" style="grid-column:3;grid-row:6"></span>
+      </div>
+      <div class="wordmark">
+        <div class="sub">i x PUZZLE</div>
+        <div class="name">ixis</div>
+      </div>
+    </div>
+    <h1>サポート</h1>
+    <div class="date">最終更新日: 2026年7月7日</div>
+  </header>
+
+  <div class="card lead">
+    <p><strong>ixis</strong> をご利用いただきありがとうございます。よくあるご質問と操作方法、お問い合わせ先をまとめています。解決しない場合は、ページ下部よりお気軽にご連絡ください。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">1</span>動作環境</h2>
+    <p>iPhone / iPad（iOS・iPadOS）に対応しています。最新バージョンの OS とアプリでのご利用を推奨します。ネットワーク接続は広告の表示に使用します（プレイ自体はオフラインでも可能です）。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">2</span>操作方法</h2>
+    <table>
+      <tr><th>操作</th><th>アクション</th></tr>
+      <tr><td>タップ</td><td>回転</td></tr>
+      <tr><td>左右スワイプ</td><td>移動</td></tr>
+      <tr><td>下方向</td><td>ソフトドロップ（早く落とす）</td></tr>
+      <tr><td>下フリック</td><td>即落下（ハードドロップ）</td></tr>
+      <tr><td>上方向</td><td>ホールド（ブロックを一時退避）</td></tr>
+    </table>
+    <p style="margin-top:10px">基本ルール: 同じレベルのブロックは重ねると<strong>融合</strong>してレベルアップ。横に4つ以上並べると消去。最高レベル同士が重なると Lv.1 にループして大量得点。上端まで積み上がるとゲームオーバーです。</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">3</span>よくある質問</h2>
+
+    <p class="q">「広告なしプラン」（¥300）とは何ですか？</p>
+    <p class="a">買い切り（1回購入）のアプリ内課金です。ご購入いただくと<strong>広告が恒常的に非表示</strong>になり、<strong>HOLD 枠が 1 つ増えます</strong>。</p>
+
+    <p class="q">購入したのに広告が消えません／機種変更しました。</p>
+    <p class="a">「<strong>購入を復元</strong>」をお試しください。難易度選択画面の「広告を減らす」、またはプレイ画面右の「+HOLD」から購入モーダルを開き、「購入を復元」をタップします。購入時と<strong>同じ Apple ID</strong> でサインインしている必要があります。</p>
+
+    <p class="q">リワード動画を見たのに特典が反映されません。</p>
+    <p class="a">通信環境をご確認のうえ、少し時間をおいて再度お試しください。動画視聴の特典は<strong>その日のみ</strong>の広告オフと、HOLD 枠の<strong>一時的な +1</strong>です（恒常ではありません）。</p>
+
+    <p class="q">HOLD 枠とは？</p>
+    <p class="a">落下中のブロックを一時的に退避しておける枠です。無料版は 1 枠、「広告なしプラン」購入または動画視聴で +1 されます。</p>
+
+    <p class="q">スコアや設定は引き継げますか？</p>
+    <p class="a">スコア・ランキング・各種設定は<strong>端末内にのみ保存</strong>されます。機種変更ではこれらのデータは引き継がれません（「広告なしプラン」の購入状態は、同じアカウントで「購入を復元」により引き継げます）。</p>
+
+    <p class="q">音が出ません。</p>
+    <p class="a">アプリ内「設定」の各ミュート、および端末側のマナーモード・音量をご確認ください。</p>
+  </div>
+
+  <div class="card contact">
+    <h2><span class="n">4</span>お問い合わせ</h2>
+    <p>上記で解決しない場合は、下記メールまでご連絡ください。スムーズな対応のため、可能な範囲で <strong>ご利用端末（例: iPhone 15）・OS バージョン・発生状況や再現手順</strong> をお知らせください（課金に関するお問い合わせはレシートも添付いただけると確認がスムーズです）。</p>
+    <a href="mailto:iPr0g5na@gmail.com?subject=ixis%20%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">iPr0g5na@gmail.com</a>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">5</span>関連リンク</h2>
+    <ul>
+      <li><a href="https://yuya4i.github.io/ixis/privacy/">プライバシーポリシー</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    <span class="mk">ixis</span> — i x PUZZLE　·　© 2026 yuya Takahashi<br>
+    <a href="https://yuya4i.github.io/ixis/privacy/">プライバシーポリシー</a>
+  </footer>
+</main>
+</body>
+</html>
